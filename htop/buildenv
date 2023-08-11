@@ -1,0 +1,40 @@
+export ZOPEN_GIT_URL="https://github.com/htop-dev/htop.git"
+export ZOPEN_GIT_DEPS="git autoconf automake make gzip gnulib"
+
+export ZOPEN_TARBALL_URL="https://github.com/htop-dev/htop/releases/download/3.2.1/htop-3.2.1.tar.xz"
+export ZOPEN_TYPE="GIT"
+
+export ZOPEN_BOOTSTRAP="./autogen.sh"
+export ZOPEN_EXTRA_CONFIGURE_OPTS="--disable-unicode"
+export ZOPEN_EXTRA_CPPFLAGS="-I${HTOP_DIR}/zos,\$ZOSLIB_HOME/include,\$NCURSES_HOME/include/ncurses,zos"
+export ZOPEN_EXTRA_CFLAGS='-qnoopt'
+export ZOPEN_EXTRA_LDFLAGS="-L ${HTOP_DIR}/zos/lib/lib" # hack - fix
+export ZOPEN_EXTRA_LIBS='-l gnu'
+
+zopen_check_results()
+{
+  dir="$1"
+  pfx="$2"
+  chk="$1/$2_check.log"
+
+  # Echo the following information to guage build health
+  echo "actualFailures:0"
+  echo "totalTests:1"
+  echo "expectedFailures:0"
+}
+
+#
+# Run genlib to generate GNU functions missing on z/OS _after_ patching
+# but _before_ configuration
+#
+zopen_init()
+{
+  devdir="$1"
+  (cd "${devdir}/zos" && ./genlib.sh)
+}
+
+zopen_get_version()
+{
+  version=$(./htop --version | cut -d' ' -f2)
+  echo $version
+}
