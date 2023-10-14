@@ -1,0 +1,34 @@
+diff --git a/configure b/configure
+index 7d07f8213..1d8bce10c 100755
+--- a/configure
++++ b/configure
+@@ -5,7 +5,10 @@
+ # Configuration script for POCO.
+ #
+ # Invoke configure --help for help.
+-#
++
++
++																					
++
+ 
+ showhelp()
+ {
+@@ -277,12 +280,16 @@ while [ $# -ge 1 ]; do
+ 
+ 	*)
+ 		showhelp
+-		exit 1
++		exit 0
+ 		;;
+ 	esac
+ 
+  	shift
++
+ done
++
++
++	
+ # autodetect build environment
+ # ...special cases for CYGWIN or MinGW
+ if [ "$config" = "" ] ; then
