@@ -1,10 +1,17 @@
 export ZOPEN_STABLE_URL="https://gitlab.com/procps-ng/procps/-/archive/master/procps-master.tar.bz2"
-export ZOPEN_STABLE_DEPS="zoslib gawk curl gzip coreutils make perl autoconf automake m4"
+export ZOPEN_STABLE_DEPS="zoslib gawk curl gzip coreutils make perl pkgconfig autoconf automake m4"
 export ZOPEN_BUILD_LINE="STABLE"
 
 
 export ZOPEN_EXTRA_CFLAGS=""
 export ZOPEN_EXTRA_LDFLAGS=""
+export ZOPEN_RUNTIME_DEPS="perl m4"
+
+
+if [ $LIBPATH = "*/5.24.0/*" ]; then
+    export LIBPATH="/home/gristr/zopen/dev/usr/lib:/usr/lpp/IBM/cyp/v3r9/pyz/lib:/lib:/usr/lib:.:/usr/lpp/IBM/zoautil/lib:/usr/lpp/db2d10/jdbc/lib:/usr/lpp/IBM/dbb/lib:/rsusr/ported/lib:/rsusr/ported/lib/perl5/5.38.0/s390/CORE:"
+    echo "Updated LIBPATH: $LIBPATH"
+fi
 
 zopen_check_results()
 {
