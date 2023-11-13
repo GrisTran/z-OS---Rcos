@@ -3,12 +3,14 @@ export ZOPEN_STABLE_DEPS="zoslib ncurses gettext wget bash sed gawk libtool curl
 export ZOPEN_BUILD_LINE="STABLE"
 
 
-export ZOPEN_EXTRA_CFLAGS=""
-export ZOPEN_EXTRA_LDFLAGS=""
+export ZOPEN_EXTRA_LDFLAGS="-L/gristr/zopen-data/dev/usr/local/zopen/ncurses/ncurses-6.3.20231109_110849.zos/lib"
+export ZOPEN_EXTRA_CPPFLAGS="-I/gristr/zopen-data/dev/usr/local/zopen/ncurses/ncurses-6.3.20231109_110849.zos/include"
+
 export ZOPEN_RUNTIME_DEPS="perl m4"
 export ZOPEN_BOOTSTRAP="./autogen.sh" 
 
 export SED="$HOME/zopen/dev/usr/local/bin/sed" 
+export NCURSES="$HOME/zopen/dev/usr/local/include/ncurses" 
 
 zopen_check_results()
 {
