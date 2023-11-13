@@ -1,0 +1,27 @@
+diff --git a/Foundation/src/DirectoryWatcher.cpp b/Foundation/src/DirectoryWatcher.cpp
+index 6e72d2f4d..2efc4ee63 100644
+--- a/Foundation/src/DirectoryWatcher.cpp
++++ b/Foundation/src/DirectoryWatcher.cpp
+@@ -24,7 +24,7 @@
+ #include "Poco/Event.h"
+ #include "Poco/Exception.h"
+ #include "Poco/Buffer.h"
+-#if POCO_OS == POCO_OS_LINUX || POCO_OS == POCO_OS_ANDROID
++#if POCO_OS == POCO_OS_LINUX || POCO_OS == POCO_OS_ANDROID || defined(__MVS__)
+ 	#include <sys/inotify.h>
+ 	#include <sys/select.h>
+ 	#include <unistd.h>
+@@ -259,7 +259,12 @@ public:
+ 		_fd(-1),
+ 		_stopped(false)
+ 	{
+-		_fd = inotify_init();
++		#ifdef __MVS__
++		'inotify_init'
++		_fd=retval ; 
++		#else
++		_fd = inotify_init(); 
++		#endif
+ 		if (_fd == -1) throw Poco::IOException("cannot initialize inotify", errno);
+ 	}
+ 
